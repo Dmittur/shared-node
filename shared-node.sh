@@ -74,5 +74,5 @@ npm install
 sed -i 's/stdout/file/g' config_default.json
 npm start
 pm2 startup
-sudo reboot
+nano idena-node-proxy/.env
 fi
