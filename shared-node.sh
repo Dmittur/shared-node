@@ -82,12 +82,11 @@ done" > start'
 chmod +x start
 (crontab -l 2>/dev/null; echo "@reboot screen -dmS node $PWD/start") | crontab -
 
-sudo npm i npm@latest -g
-git clone https://github.com/idena-network/idena-node-proxy
+sudo apt install npm
+sudo git clone https://github.com/idena-network/idena-node-proxy
 sudo npm i -g pm2
 
 cd idena-node-proxy
-wget https://raw.githubusercontent.com/rioda-org/idena/main/index.html
 
 bash -c 'echo "AVAILABLE_KEYS=[\"api1\",\"api2\"]
 IDENA_URL=\"http://localhost:9009\"
