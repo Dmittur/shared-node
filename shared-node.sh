@@ -94,7 +94,7 @@ IDENA_KEY=\"123\"
 PORT=80" > .env'
 #GOD_API_KEY=\"test\"
 #REMOTE_KEYS_ENABLED=0
-npm install
+sudo npm install
 sed -i 's/stdout/file/g' config_default.json
 npm start
 pm2 startup
