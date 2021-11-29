@@ -82,9 +82,9 @@ done" > start'
 chmod +x start
 (crontab -l 2>/dev/null; echo "@reboot screen -dmS node $PWD/start") | crontab -
 
-npm i npm@latest -g
+sudo npm i npm@latest -g
 git clone https://github.com/idena-network/idena-node-proxy
-npm i -g pm2
+sudo npm i -g pm2
 
 cd idena-node-proxy
 wget https://raw.githubusercontent.com/rioda-org/idena/main/index.html
