@@ -88,14 +88,14 @@ sudo npm i -g pm2
 
 cd idena-node-proxy
 
-bash -c 'echo "AVAILABLE_KEYS=[\"api1\",\"api2\"]
+sudo bash -c 'echo "AVAILABLE_KEYS=[\"api1\",\"api2\"]
 IDENA_URL=\"http://localhost:9009\"
 IDENA_KEY=\"123\"
 PORT=80" > .env'
 #GOD_API_KEY=\"test\"
 #REMOTE_KEYS_ENABLED=0
 sudo npm install
-sed -i 's/stdout/file/g' config_default.json
+sudo sed -i 's/stdout/file/g' config_default.json
 npm start
 pm2 startup
 sudo ufw allow 80/tcp
