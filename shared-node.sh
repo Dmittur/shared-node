@@ -26,7 +26,7 @@ sudo apt install iptables-persistent -y
 sudo service netfilter-persistent save
 sudo iptables -L -n --line-numbers
 sudo apt-get install zip unzip screen wget -y
-if [ -d "/root/idena-node-proxy" ]; then
+if [ -d "/ubuntu/idena-node-proxy" ]; then
 echo "idena-node-proxy already installed"
 else
 sudo apt-get update && sudo apt-get upgrade -y
