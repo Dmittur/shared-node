@@ -5,7 +5,7 @@ sudo apt-get update && apt-get upgrade -y
 sudo apt full-upgrade -y
 #Files
 sudo echo "DefaultLimitNOFILE=65535" >> /etc/systemd/system.conf
-#swap file 2 Gb
+#swap file 4 Gb
 sudo swapon --show
 sudo fallocate -l 4G /swapfile
 sudo chmod 600 /swapfile
@@ -18,6 +18,7 @@ sudo echo 'vm.swappiness=25' >> /etc/sysctl.conf
 #Time
 sudo apt install ntpsec
 sudo service ntpsec restart
+#iptables
 sudo iptables -A INPUT -p tcp -m tcp --dport 22 -m state --state NEW -m hashlimit --hashlimit 1/hour --hashlimit-burst 2 --hashlimit-mode srcip --hashlimit-name SSH --hashlimit-htable-expire 60000 -j ACCEPT
 sudo iptables -A INPUT -p tcp -m tcp --dport 22 --tcp-flags SYN,RST,ACK SYN -j DROP
 sudo iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
