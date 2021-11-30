@@ -26,6 +26,7 @@ sudo apt install iptables-persistent -y
 sudo service netfilter-persistent save
 sudo iptables -L -n --line-numbers
 sudo apt-get install zip git unzip curl screen wget -y
+#idena-node-proxy
 if [ -d "/ubuntu/idena-node-proxy" ]; then
 echo "idena-node-proxy already installed"
 else
@@ -36,7 +37,7 @@ sudo tar -xJvf node-v16.13.0-linux-x64.tar.xz -C /usr/local/lib/nodejs
 rm node-v16.13.0-linux-x64.tar.xz
 echo "export PATH=/usr/local/lib/nodejs/node-v16.13.0-linux-x64/bin:$PATH" >> ~/.profile
 . ~/.profile
-
+#idena.go
 mkdir datadir && cd datadir
 mkdir idenachain.db && cd idenachain.db
 wget "https://sync.idena.site/idenachain.db.zip"
@@ -101,5 +102,4 @@ sudo ufw allow 443/tcp
 sudo ufw enable
 sudo ufw reload
 ulimit -n 200000
-sudo reboot
 fi
