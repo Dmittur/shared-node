@@ -25,12 +25,10 @@ sudo iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
 sudo apt install iptables-persistent -y
 sudo service netfilter-persistent save
 sudo iptables -L -n --line-numbers
-sudo apt-get install zip unzip screen wget -y
+sudo apt-get install zip git unzip curl screen wget -y
 if [ -d "/ubuntu/idena-node-proxy" ]; then
 echo "idena-node-proxy already installed"
 else
-sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install git unzip curl screen -y
 # Node.js 16.13 instalation
 wget https://github.com/rioda-org/idena/raw/main/node-v16.13.0-linux-x64.tar.xz
 sudo mkdir -p /usr/local/lib/nodejs
