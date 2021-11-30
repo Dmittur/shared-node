@@ -27,9 +27,11 @@ sudo service netfilter-persistent save
 sudo iptables -L -n --line-numbers
 sudo apt-get install zip git unzip curl screen wget -y
 #idena-node-proxy
-if [ -d "/ubuntu/idena-node-proxy" ]; then
+if [ -d "/root/idena-node-proxy" ]; then
 echo "idena-node-proxy already installed"
 else
+sudo apt-get update && sudo apt-get upgrade -y
+sudo apt-get install git unzip curl screen -y
 # Node.js 16.13 instalation
 wget https://github.com/rioda-org/idena/raw/main/node-v16.13.0-linux-x64.tar.xz
 sudo mkdir -p /usr/local/lib/nodejs
@@ -37,7 +39,7 @@ sudo tar -xJvf node-v16.13.0-linux-x64.tar.xz -C /usr/local/lib/nodejs
 rm node-v16.13.0-linux-x64.tar.xz
 echo "export PATH=/usr/local/lib/nodejs/node-v16.13.0-linux-x64/bin:$PATH" >> ~/.profile
 . ~/.profile
-#idena.go
+
 mkdir datadir && cd datadir
 mkdir idenachain.db && cd idenachain.db
 wget "https://sync.idena.site/idenachain.db.zip"
@@ -50,7 +52,7 @@ curl -s https://api.github.com/repos/idena-network/idena-go/releases/latest \
 | cut -d '"' -f 4 \
 | wget -qi -
 mv idena-* idena-go && chmod +x idena-go
-bash -c 'echo "{\"IpfsConf\":{\"Profile\": \"server\" ,\"FlipPinThreshold\":1},\"Sync\": {\"LoadAllFlips\": true, \"AllFlipsLoadingTime\":21600000000000}}" > config.json'
+bash -c 'echo "{\"IpfsConf\":{\"Profile\": \"server\" ,\"FlipPinThreshold\":1},\"Sync\": {\"LoadAllFlips\": true, \"AllFlipsLoadingTime\":7200000000000}}" > config.json'
 
 #this is conf for minimal test node
 #bash -c 'echo "{\"P2P\":{\"MaxInboundPeers\":4,\"MaxOutboundPeers\":1},\"IpfsConf\":{\"Profile\":\"server\",\"BlockPinThreshold\":0.1,\"FlipPinThreshold\":0.1}}" > config.json'
@@ -86,15 +88,17 @@ git clone https://github.com/idena-network/idena-node-proxy
 npm i -g pm2
 
 cd idena-node-proxy
+wget https://raw.githubusercontent.com/rioda-org/idena/main/index.html
 
-sudo bash -c 'echo "AVAILABLE_KEYS=[\"api1\",\"api2\"]
+bash -c 'echo "AVAILABLE_KEYS=[\"api1\",\"api2\"]
 IDENA_URL=\"http://localhost:9009\"
 IDENA_KEY=\"123\"
 PORT=80" > .env'
 #GOD_API_KEY=\"test\"
 #REMOTE_KEYS_ENABLED=0
-sudo npm install
-sudo sed -i 's/stdout/file/g' config_default.json
+
+npm install
+sed -i 's/stdout/file/g' config_default.json
 npm start
 pm2 startup
 sudo ufw allow 80/tcp
