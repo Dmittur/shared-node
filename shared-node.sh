@@ -52,7 +52,7 @@ curl -s https://api.github.com/repos/idena-network/idena-go/releases/latest \
 | cut -d '"' -f 4 \
 | wget -qi -
 mv idena-* idena-go && chmod +x idena-go
-bash -c 'echo "{\"IpfsConf\":{\"Profile\": \"server\" ,\"FlipPinThreshold\":1},\"Sync\": {\"LoadAllFlips\": true, \"AllFlipsLoadingTime\":7200000000000}}" > config.json'
+bash -c 'echo "{\"IpfsConf\":{\"Profile\": \"server\" ,\"FlipPinThreshold\":1},\"Sync\": {\"LoadAllFlips\": true, \"AllFlipsLoadingTime\":21600000000000}}" > config.json'
 
 #this is conf for minimal test node
 #bash -c 'echo "{\"P2P\":{\"MaxInboundPeers\":4,\"MaxOutboundPeers\":1},\"IpfsConf\":{\"Profile\":\"server\",\"BlockPinThreshold\":0.1,\"FlipPinThreshold\":0.1}}" > config.json'
@@ -101,9 +101,4 @@ npm install
 sed -i 's/stdout/file/g' config_default.json
 npm start
 pm2 startup
-sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
-sudo ufw enable
-sudo ufw reload
-ulimit -n 200000
 fi
